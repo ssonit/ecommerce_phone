@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id         String      @id @default(uuid())
+  externalId String      @unique
+  email      String      @unique
+  password   String
+  username   String
+  avatar     String
+  phone      String?     @unique
+  address    String?
+  products   Product[]
+  cartItem   CartItem[]
+  orderItem  OrderItem[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Product {
+  id        String      @id @default(uuid())
+  name      String
+  price     Decimal
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  colors    Color[]     @relation("ProductColor")
+  images    Image[]
+  cartItem  CartItem[]
+  orderItem OrderItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  colorId   String
+  color     Color    @relation(fields: [colorId], references: [id])
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+  @@index([colorId])
+  @@index([userId])
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  colorId   String
+  color     Color    @relation(fields: [colorId], references: [id])
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([productId])
+  @@index([colorId])
+}
+
+model Color {
+  id        String      @id @default(uuid())
+  name      String
+  value     String
+  product   Product[]   @relation("ProductColor")
+  cartItem  CartItem[]
+  orderItem OrderItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
