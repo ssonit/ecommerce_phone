@@ -11,6 +11,7 @@ import {
   Menu,
   Minus,
   Plus,
+  Search,
   ShoppingCart,
   Star,
   Trash,
@@ -33,6 +34,7 @@ export const Icons = {
   ArrowUpNarrowWide: ArrowUpNarrowWide,
   Menu: Menu,
   ImagePlus: ImagePlus,
+  Search: Search,
   Google: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 24 24'>
       <path
