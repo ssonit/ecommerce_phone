@@ -11,6 +11,7 @@ import * as z from 'zod';
 const formSchema = z.object({
   name: z.string(),
   price: z.coerce.number(),
+  description: z.string(),
   images: z.object({ url: z.string() }).array()
 });
 
@@ -20,6 +21,7 @@ export default function ProductForm() {
     defaultValues: {
       name: '',
       price: 0,
+      description: '',
       images: []
     }
   });
@@ -32,7 +34,8 @@ export default function ProductForm() {
     try {
       const res = await axios.post('/api/products/create', {
         name: values.name,
-        price: values.price
+        price: values.price,
+        description: values.description
       });
 
       const data = res.data;
@@ -62,6 +65,19 @@ export default function ProductForm() {
           />
           <FormField
             control={form.control}
+            name='description'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mô tả sản phẩm</FormLabel>
+                <FormControl>
+                  <Input disabled={isSubmitting} placeholder='Mô tả' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name='price'
             render={({ field }) => (
               <FormItem>
@@ -75,7 +91,7 @@ export default function ProductForm() {
           />
         </div>
         <Button disabled={isSubmitting} className='ml-auto' type='submit'>
-          Create
+          Tạo
         </Button>
       </form>
     </Form>

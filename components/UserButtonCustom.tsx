@@ -26,7 +26,7 @@ export default function UserButtonCustom() {
     );
 
   return (
-    <div>
+    <div className='h-8'>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar className='h-8 w-8'>

@@ -15,7 +15,7 @@ export default function Navbar() {
           <SearchBar></SearchBar>
         </div>
         <NavbarList></NavbarList>
-        <div className='hidden h-8 md:block'>
+        <div className='hidden md:block'>
           <UserButtonCustom></UserButtonCustom>
         </div>
       </div>

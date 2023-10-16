@@ -8,17 +8,17 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    const { name, price } = body;
+    const { name, price, description } = body;
 
     const colors = [
       {
-        id: 'd4e4e268-672f-4e37-8e96-85a7795cf33e'
+        id: '1fbdf27a-27ec-49e0-880d-a2ab44b13692'
       }
     ];
 
     const images = [
       {
-        url: 'https://picsum.photos/id/237/200/300'
+        url: 'https://images.unsplash.com/photo-1696677528468-7b5af2d5363b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1898&q=80'
       }
     ];
 
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
         name,
         price,
         userId,
+        description,
         colors: {
           connect: [...colors.map((item: { id: string }) => item)]
         },

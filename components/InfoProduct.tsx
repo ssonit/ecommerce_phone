@@ -6,29 +6,30 @@ import Quantity from '@/components/Quantity';
 import ReviewItem from '@/components/ReviewItem';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProductImage } from '@/types/products';
 
-export default function InfoProduct() {
+export default function InfoProduct({ product }: { product: ProductImage }) {
+  const { images, name, price } = product;
   return (
     <div>
-      <Card className='mb-10 pb-10'>
+      <Card className='mb-10'>
         <div className='grid grid-cols-1 gap-3 lg:grid-cols-12'>
           <div className='col-span-1 lg:col-span-5'>
-            <Image
-              src='https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-pro_2__2.png'
-              // src={
-              //   'https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/m/2/m2_pro_14.png'
-              // }
-              alt='product-item'
-              className='h-auto w-full select-none rounded-lg object-cover'
-              width={400}
-              height={400}
-              sizes='(max-width: 50px) 2vw, (max-width: 425px) 50vw, 75vw'
-              quality={100} //default 75
-            ></Image>
+            <div className='p-2'>
+              <Image
+                src={images[0].url}
+                alt={name}
+                className='h-[549px] w-full select-none rounded-lg object-cover'
+                width={400}
+                height={400}
+                sizes='(max-width: 50px) 2vw, (max-width: 425px) 50vw, 75vw'
+                quality={100} //default 75
+              ></Image>
+            </div>
           </div>
           <div className='col-span-1 mt-16 md:mt-0 lg:col-span-7'>
             <CardHeader className='px-3 pb-4'>
-              <CardTitle className='text-2xl'>Xiaomi Redmi Note 12 Pro</CardTitle>
+              <CardTitle className='text-2xl'>{name}</CardTitle>
               <div className='flex items-center gap-1'>
                 <Icons.Star></Icons.Star>
                 <Icons.Star></Icons.Star>
@@ -43,7 +44,7 @@ export default function InfoProduct() {
               </CardDescription>
             </CardHeader>
             <CardContent className='px-3 pb-3'>
-              <div className='rounded bg-gray-100 px-6 py-3 font-semibold text-red-600'>21.000.000đ</div>
+              <div className='rounded bg-gray-100 px-6 py-3 font-semibold text-red-600'>{price.toString()}</div>
               <div className='mt-6 flex items-center gap-6'>
                 <span className='w-20'>Màu</span>
                 <div className='flex items-center gap-3'>

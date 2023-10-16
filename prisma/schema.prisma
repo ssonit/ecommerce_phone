@@ -28,17 +28,18 @@ model User {
 }
 
 model Product {
-  id        String      @id @default(uuid())
-  name      String
-  price     Decimal
-  userId    String
-  user      User        @relation(fields: [userId], references: [id])
-  colors    Color[]     @relation("ProductColor")
-  images    Image[]
-  cartItem  CartItem[]
-  orderItem OrderItem[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id          String      @id @default(uuid())
+  name        String
+  price       Decimal
+  description String
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  colors      Color[]     @relation("ProductColor")
+  images      Image[]
+  cartItem    CartItem[]
+  orderItem   OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@index([userId])
 }
