@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icons } from '@/components/Icons';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProductImage } from '@/types/products';
@@ -13,15 +14,16 @@ export default function ProductItem({ product }: { product: ProductImage }) {
       <Link href={`/${id}`}>
         <Card className='cursor-pointer border-slate-400 shadow-xl'>
           <div className='p-1.5'>
-            <Image
-              src={images[0].url}
-              alt={name}
-              className='h-[230px] w-full select-none rounded-md object-cover'
-              width={200}
-              height={400}
-              sizes='(max-width: 50px) 2vw, (max-width: 425px) 50vw, 75vw'
-              quality={100} //default 75
-            ></Image>
+            <AspectRatio ratio={1 / 1} className='relative w-full'>
+              <Image
+                src={images[0].url}
+                alt={name}
+                className='h-full w-full select-none rounded-md object-cover transition'
+                fill
+                sizes='(max-width: 50px) 2vw, (max-width: 425px) 50vw, 75vw'
+                quality={100} //default 75
+              ></Image>
+            </AspectRatio>
           </div>
           <CardHeader className='px-3 pb-4'>
             <CardTitle className='text-base'>{name}</CardTitle>

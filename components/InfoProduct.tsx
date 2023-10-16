@@ -4,6 +4,7 @@ import { Icons } from '@/components/Icons';
 import ProductList from '@/components/ProductList';
 import Quantity from '@/components/Quantity';
 import ReviewItem from '@/components/ReviewItem';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProductImage } from '@/types/products';
@@ -16,15 +17,16 @@ export default function InfoProduct({ product }: { product: ProductImage }) {
         <div className='grid grid-cols-1 gap-3 lg:grid-cols-12'>
           <div className='col-span-1 lg:col-span-5'>
             <div className='p-2'>
-              <Image
-                src={images[0].url}
-                alt={name}
-                className='h-[549px] w-full select-none rounded-lg object-cover'
-                width={400}
-                height={400}
-                sizes='(max-width: 50px) 2vw, (max-width: 425px) 50vw, 75vw'
-                quality={100} //default 75
-              ></Image>
+              <AspectRatio ratio={1 / 1} className='relative w-full'>
+                <Image
+                  src={images[0].url}
+                  alt={name}
+                  className='h-full w-full select-none rounded-md object-cover transition'
+                  fill
+                  sizes='(max-width: 50px) 2vw, (max-width: 425px) 50vw, 75vw'
+                  quality={100} //default 75
+                ></Image>
+              </AspectRatio>
             </div>
           </div>
           <div className='col-span-1 mt-16 md:mt-0 lg:col-span-7'>
