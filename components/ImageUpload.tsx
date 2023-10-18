@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-// import { CldUploadWidget } from 'next-cloudinary';
-import { Icons } from './Icons';
+import { ImagePlus, Trash } from 'lucide-react';
+import { CldUploadWidget } from 'next-cloudinary';
 
 interface ImageUploadProps {
   disabled?: boolean;
@@ -13,7 +13,7 @@ interface ImageUploadProps {
   value: string[];
 }
 
-export default function ImageUpload({ disabled, onChange, onRemove, value }: ImageUploadProps) {
+const ImageUpload: React.FC<ImageUploadProps> = ({ disabled, onChange, onRemove, value }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -30,32 +30,35 @@ export default function ImageUpload({ disabled, onChange, onRemove, value }: Ima
 
   return (
     <div>
-      <div className='mb-4 flex items-center gap-4'>
-        {value.map((url) => (
-          <div key={url} className='relative h-[200px] w-[200px] overflow-hidden rounded-md'>
-            <div className='absolute right-2 top-2 z-10'>
-              <Button type='button' onClick={() => onRemove(url)} variant='destructive' size='sm'>
-                <Icons.Trash className='h-4 w-4'></Icons.Trash>
-              </Button>
-            </div>
-            <Image fill className='object-cover' alt='Image' src={url} />
-          </div>
-        ))}
-      </div>
-      {/* <CldUploadWidget onUpload={onUpload} uploadPreset='t4drjppf'>
+      <CldUploadWidget onUpload={onUpload} uploadPreset='fct8o63u'>
         {({ open }) => {
           const onClick = () => {
             open();
           };
 
           return (
-            <Button type='button' disabled={disabled} variant='secondary' onClick={onClick}>
-              <Icons.Plus className='w-4 h-4 mr-2' />
-              Upload an Image
+            <Button type='button' disabled={disabled} variant='outline' onClick={onClick}>
+              <ImagePlus className='mr-2 h-4 w-4' />
+              Tải hình ảnh lên
             </Button>
           );
         }}
-      </CldUploadWidget> */}
+      </CldUploadWidget>
+
+      <div className='my-4 flex items-center gap-4'>
+        {value.map((url) => (
+          <div key={url} className='relative h-[200px] w-[200px] overflow-hidden rounded-md'>
+            <div className='absolute right-2 top-2 z-10'>
+              <Button type='button' onClick={() => onRemove(url)} variant='destructive' size='sm'>
+                <Trash className='h-4 w-4' />
+              </Button>
+            </div>
+            <Image fill className='object-cover' alt='Image' src={url} />
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
+
+export default ImageUpload;

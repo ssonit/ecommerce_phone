@@ -1,5 +1,5 @@
 import { Image, Product } from '@prisma/client';
 
-export interface ProductImage extends Product {
+export type ProductImage = Product & {
   images: Image[];
-}
+};

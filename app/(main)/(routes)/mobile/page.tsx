@@ -1,8 +1,10 @@
+import { getProducts } from '@/actions/products';
 import { Icons } from '@/components/Icons';
 import ProductList from '@/components/ProductList';
 import { Button } from '@/components/ui/button';
 
-export default function Mobile() {
+export default async function Mobile() {
+  const products = await getProducts();
   return (
     <div className='container'>
       <section className='my-5'>
@@ -19,7 +21,7 @@ export default function Mobile() {
         </div>
       </section>
       <section>
-        <ProductList></ProductList>
+        <ProductList data={products}></ProductList>
       </section>
     </div>
   );

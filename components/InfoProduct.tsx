@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ProductImage } from '@/types/products';
 
 export default function InfoProduct({ product }: { product: ProductImage }) {
-  const { images, name, price } = product;
+  const { images, name, price, description } = product;
   return (
     <div>
       <Card className='mb-10'>
@@ -32,18 +32,14 @@ export default function InfoProduct({ product }: { product: ProductImage }) {
           <div className='col-span-1 mt-16 md:mt-0 lg:col-span-7'>
             <CardHeader className='px-3 pb-4'>
               <CardTitle className='text-2xl'>{name}</CardTitle>
-              <div className='flex items-center gap-1'>
+              {/* <div className='flex items-center gap-1'>
                 <Icons.Star></Icons.Star>
                 <Icons.Star></Icons.Star>
                 <Icons.Star></Icons.Star>
                 <Icons.Star></Icons.Star>
                 <Icons.Star></Icons.Star>
-              </div>
-              <CardDescription>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, blanditiis commodi. Distinctio
-                esse aliquid autem iste excepturi maiores illo dolore nisi. Consequatur eius rerum ipsam quibusdam sunt
-                quasi magni! Obcaecati.
-              </CardDescription>
+              </div> */}
+              <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent className='px-3 pb-3'>
               <div className='rounded bg-gray-100 px-6 py-3 font-semibold text-red-600'>{price.toString()}</div>
