@@ -29,7 +29,7 @@ export default function UserButtonCustom() {
     <div className='h-8'>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Avatar className='h-8 w-8'>
+          <Avatar className='h-8 w-8 select-none'>
             <AvatarImage src={user.imageUrl} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>

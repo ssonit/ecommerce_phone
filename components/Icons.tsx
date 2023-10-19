@@ -5,11 +5,14 @@ import {
   Bell,
   ChevronLeft,
   ChevronRight,
+  Copy,
+  Edit,
   Heart,
   ImagePlus,
   LucideProps,
   Menu,
   Minus,
+  MoreHorizontal,
   Plus,
   Search,
   ShoppingCart,
@@ -35,6 +38,9 @@ export const Icons = {
   Menu: Menu,
   ImagePlus: ImagePlus,
   Search: Search,
+  MoreHorizontal: MoreHorizontal,
+  Copy: Copy,
+  Edit: Edit,
   Google: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 24 24'>
       <path
