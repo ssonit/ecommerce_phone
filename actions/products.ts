@@ -1,12 +1,17 @@
 import { prisma } from '@/lib/prismadb';
+import { SortDirection } from '@/types/products';
 
-export const getProducts = async (sort: 'desc' | 'asc' = 'desc') => {
+export const getProducts = async (
+  sort: Record<string, SortDirection> = {
+    createdAt: 'desc'
+  }
+) => {
   const data = await prisma.product.findMany({
     include: {
       images: true
     },
     orderBy: {
-      createdAt: sort
+      ...sort
     }
   });
 
