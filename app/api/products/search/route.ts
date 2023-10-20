@@ -7,10 +7,7 @@ export async function GET(req: NextRequest) {
 
     const params = Object.fromEntries(searchParams.entries());
 
-    const { search, page, limit } = params;
-
-    const page_size = parseInt(limit) || 10;
-    const skip = parseInt(page) > 0 ? (parseInt(page) - 1) * page_size : 0;
+    const { search } = params;
 
     const data = await prisma.product.findMany({
       where: {
@@ -18,8 +15,7 @@ export async function GET(req: NextRequest) {
           contains: search
         }
       },
-      take: page_size,
-      skip: skip
+      take: 10
     });
 
     return NextResponse.json({ data });

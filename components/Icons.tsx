@@ -18,7 +18,8 @@ import {
   ShoppingCart,
   Star,
   Trash,
-  User
+  User,
+  X
 } from 'lucide-react';
 
 export const Icons = {
@@ -41,6 +42,7 @@ export const Icons = {
   MoreHorizontal: MoreHorizontal,
   Copy: Copy,
   Edit: Edit,
+  X: X,
   Google: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 24 24'>
       <path

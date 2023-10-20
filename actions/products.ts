@@ -1,3 +1,4 @@
+import { LIMIT_PRODUCT } from '@/constants/utils';
 import { prisma } from '@/lib/prismadb';
 import { SortDirection } from '@/types/products';
 
@@ -29,4 +30,49 @@ export const getProductId = async ({ productId }: { productId: string }) => {
   });
 
   return data;
+};
+
+export const getManageProducts = async ({ search, page, limit }: { search: string; page: string; limit: string }) => {
+  const page_size = limit ? parseInt(limit) : LIMIT_PRODUCT;
+  const skip = parseInt(page) > 0 ? (parseInt(page) - 1) * page_size : 0;
+
+  const data = await prisma.product.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: search
+          }
+        },
+        {
+          id: search
+        }
+      ]
+    },
+    take: page_size,
+    skip: skip,
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+
+  const total = await prisma.product.count({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: search
+          }
+        },
+        {
+          id: search
+        }
+      ]
+    }
+  });
+
+  return {
+    data,
+    total
+  };
 };

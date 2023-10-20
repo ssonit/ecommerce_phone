@@ -24,7 +24,7 @@ export default function SearchBar() {
     async function fetchData() {
       try {
         if (debouncedValue) {
-          const data = await axios.get<{ data: Product[] }>(`/api/products?search=${debouncedValue}`);
+          const data = await axios.get<{ data: Product[] }>(`/api/products/search?search=${debouncedValue}`);
 
           setProducts(data.data.data);
         }
