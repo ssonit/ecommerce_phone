@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { ProductImage } from '@/types/products';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
@@ -21,16 +22,26 @@ const formSchema = z.object({
   images: z.object({ url: z.string() }).array()
 });
 
-export default function ProductForm() {
+export default function ProductForm({ initData }: { initData?: ProductImage }) {
   const router = useRouter();
+
+  const defaultValues = initData
+    ? {
+        name: initData.name,
+        price: Number(initData.price.toString()),
+        description: initData.description,
+        images: initData.images
+      }
+    : {
+        name: '',
+        price: 0,
+        description: '',
+        images: []
+      };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      price: 0,
-      description: '',
-      images: []
-    }
+    defaultValues
   });
 
   const {
@@ -39,14 +50,14 @@ export default function ProductForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post('/api/products/create', {
-        name: values.name,
-        price: values.price,
-        description: values.description,
-        images: values.images
-      });
+      if (initData) {
+        await axios.put(`/api/products/${initData.id}`, values);
+      } else {
+        await axios.post('/api/products/create', values);
+      }
       router.refresh();
-      toast.success('Tạo sản phẩm thành công');
+      router.push('/products/manage');
+      toast.success(`${initData ? 'Cập nhật' : 'Tạo'} sản phẩm thành công`);
     } catch (error) {
       console.log(error);
     }
@@ -121,7 +132,7 @@ export default function ProductForm() {
           )}
         />
         <Button disabled={isSubmitting} className='ml-auto' type='submit'>
-          Tạo
+          {initData ? 'Cập nhật' : 'Tạo'}
         </Button>
       </form>
     </Form>

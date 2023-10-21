@@ -25,7 +25,6 @@ export default function ManageSearchProducts({ className }: { className?: string
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values });
     if (values.search) {
       router.push(
         `${pathname}?${createQueryString({

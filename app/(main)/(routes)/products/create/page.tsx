@@ -9,7 +9,7 @@ export default function CreateProduct() {
         <SectionTitle className='my-3' title='Tạo sản phẩm' desc='Thêm sản phẩm mới'></SectionTitle>
         <Separator></Separator>
 
-        <div className='mt-3'>
+        <div className='my-3'>
           <ProductForm></ProductForm>
         </div>
       </div>

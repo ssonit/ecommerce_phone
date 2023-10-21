@@ -1,9 +1,8 @@
 import { getManageProducts } from '@/actions/products';
-import { Icons } from '@/components/Icons';
+import CreateProductButton from '@/components/CreateProductButton';
 import ManageNavigation from '@/components/ManageNavigation';
 import ManageSearchProducts from '@/components/ManageSearchProducts';
 import SectionTitle from '@/components/SectionTitle';
-import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
 import { Separator } from '@/components/ui/separator';
 import { formatDate } from '@/constants/format';
@@ -30,15 +29,13 @@ export default async function ManageProducts({
     price: item.price.toString(),
     createdAt: formatDate(item.createdAt.toISOString())
   }));
+
   return (
     <div className='container'>
       <div className='my-4 flex items-center justify-between'>
-        <SectionTitle title={`Sản phẩm (${data.length})`} desc='Quản lý sản phẩm của bạn'></SectionTitle>
+        <SectionTitle title={`Sản phẩm (${total})`} desc='Quản lý sản phẩm của bạn'></SectionTitle>
 
-        <Button>
-          <Icons.Plus className='mr-2 h-4 w-4'></Icons.Plus>
-          <span>Tạo sản phẩm</span>
-        </Button>
+        <CreateProductButton></CreateProductButton>
       </div>
       <Separator></Separator>
       <div className='my-4'>

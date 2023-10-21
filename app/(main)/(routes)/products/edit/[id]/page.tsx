@@ -1,16 +1,21 @@
+import { getProductId } from '@/actions/products';
 import ProductForm from '@/components/ProductForm';
 import SectionTitle from '@/components/SectionTitle';
 import { Separator } from '@/components/ui/separator';
 
-export default function EditProduct() {
+export default async function EditProduct({ params }: { params: { id: string } }) {
+  const data = await getProductId({ productId: params.id });
+
+  if (!data) return null;
+
   return (
     <section>
       <div className='container'>
         <SectionTitle className='my-3' title='Sửa sản phẩm' desc='Chỉnh sửa'></SectionTitle>
         <Separator></Separator>
 
-        <div className='mt-3'>
-          <ProductForm></ProductForm>
+        <div className='my-3'>
+          <ProductForm initData={data}></ProductForm>
         </div>
       </div>
     </section>
