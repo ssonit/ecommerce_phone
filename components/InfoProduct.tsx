@@ -46,7 +46,7 @@ export default function InfoProduct({ product }: { product: ProductImage }) {
               <div className='mt-6 flex items-center gap-6'>
                 <span className='w-20'>Màu</span>
                 <div className='flex items-center gap-3'>
-                  <div className='h-4 w-4 cursor-pointer rounded-full bg-blue-600 '></div>
+                  <div className='h-4 w-4 cursor-pointer rounded-full bg-blue-600'></div>
                   <div className='h-4 w-4 cursor-pointer rounded-full bg-red-600'></div>
                   <div className='h-4 w-4 cursor-pointer rounded-full bg-purple-600'></div>
                 </div>
