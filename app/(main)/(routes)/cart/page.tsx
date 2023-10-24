@@ -1,11 +1,23 @@
 import BackButton from '@/components/BackButton';
-import CartItem from '@/components/CartItem';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
+import CartMain from '@/components/CartMain';
 import { Separator } from '@/components/ui/separator';
+import { prisma } from '@/lib/prismadb';
 
-export default function ShoppingCart() {
+export default async function ShoppingCart() {
+  const carts = await prisma.cartItem.findMany({
+    include: {
+      product: {
+        include: {
+          images: true
+        }
+      },
+      color: true
+    },
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+
   return (
     <section className='relative'>
       <div>
@@ -17,27 +29,7 @@ export default function ShoppingCart() {
 
       <Separator></Separator>
 
-      <div className='container min-h-screen'>
-        <div className='my-4 flex items-center gap-2'>
-          <Checkbox id='select-all'></Checkbox>
-          <label htmlFor='select-all'>Chọn tất cả</label>
-        </div>
-
-        <Card>
-          <CardContent className='flex flex-col gap-2'>
-            <CartItem></CartItem>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className='sticky bottom-0 left-0 right-0 bg-white'>
-        <div className='container flex items-center justify-between py-3'>
-          <div>
-            <p className='font-semibold text-red-600'>21.000.000đ</p>
-          </div>
-          <Button>Mua ngay</Button>
-        </div>
-      </div>
+      <CartMain initCarts={carts}></CartMain>
     </section>
   );
 }

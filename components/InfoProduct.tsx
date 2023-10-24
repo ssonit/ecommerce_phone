@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Divider from '@/components/Divider';
 import { Icons } from '@/components/Icons';
 import ProductList from '@/components/ProductList';
@@ -7,10 +11,41 @@ import ReviewItem from '@/components/ReviewItem';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import { ProductImage } from '@/types/products';
+import { Color } from '@prisma/client';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-export default function InfoProduct({ product }: { product: ProductImage }) {
-  const { images, name, price, description } = product;
+export default function InfoProduct({ product, colors }: { product: ProductImage; colors: Color[] }) {
+  const router = useRouter();
+  const { images, name, price, description, id } = product;
+  const [quantity, setQuantity] = useState(1);
+  const handleChange = (value: number) => {
+    setQuantity(value);
+  };
+
+  const [selectedColor, setSelectedColor] = useState(() => colors[0].id);
+
+  const handleSelectedColor = (id: string) => {
+    setSelectedColor(id);
+  };
+
+  const handleAddCart = async () => {
+    try {
+      await axios.post('/api/cart', {
+        quantity,
+        colorId: selectedColor,
+        productId: id
+      });
+
+      router.refresh();
+      toast.success('Đã thêm vào giỏ hàng');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <Card className='mb-10'>
@@ -46,22 +81,40 @@ export default function InfoProduct({ product }: { product: ProductImage }) {
               <div className='mt-6 flex items-center gap-6'>
                 <span className='w-20'>Màu</span>
                 <div className='flex items-center gap-3'>
-                  <div className='h-4 w-4 cursor-pointer rounded-full bg-blue-600'></div>
-                  <div className='h-4 w-4 cursor-pointer rounded-full bg-red-600'></div>
-                  <div className='h-4 w-4 cursor-pointer rounded-full bg-purple-600'></div>
+                  {colors.map((color) => (
+                    <Button
+                      key={color.id}
+                      variant={'ghost'}
+                      size={'icon'}
+                      onClick={() => handleSelectedColor(color.id)}
+                      className={cn('flex h-6 w-6 items-center justify-center rounded-full')}
+                      style={{
+                        border: `2px solid ${color.id === selectedColor ? color.value : 'transparent'}`
+                      }}
+                    >
+                      <div
+                        className='h-4 w-4 rounded-full'
+                        style={{
+                          backgroundColor: color.value
+                        }}
+                      ></div>
+                    </Button>
+                  ))}
                 </div>
               </div>
 
               <div className='mt-6 flex items-center gap-6'>
                 <span className='w-20'>Số lượng</span>
-                <Quantity></Quantity>
+                <Quantity quantity={quantity} handleChange={handleChange}></Quantity>
               </div>
             </CardContent>
             <CardFooter className='mt-3 flex items-center gap-6 px-3 pb-2'>
               <Button variant={'outline'}>
                 <Icons.Heart className='stroke-pink-500'></Icons.Heart>
               </Button>
-              <Button variant={'outline'}>Thêm vào giỏ hàng</Button>
+              <Button onClick={handleAddCart} variant={'outline'}>
+                Thêm vào giỏ hàng
+              </Button>
               <Button>Mua ngay</Button>
             </CardFooter>
           </div>

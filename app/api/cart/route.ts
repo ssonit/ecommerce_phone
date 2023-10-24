@@ -43,14 +43,33 @@ export async function POST(req: NextRequest) {
       return NextResponse.json('Product not found', { status: 400 });
     }
 
-    const cart = await prisma.cartItem.create({
-      data: {
-        colorId,
-        quantity,
+    const existing = await prisma.cartItem.findFirst({
+      where: {
         productId,
         userId
       }
     });
+
+    let cart;
+
+    if (existing) {
+      cart = prisma.cartItem.update({
+        where: { id: existing.id },
+        data: {
+          quantity,
+          colorId
+        }
+      });
+    } else {
+      return prisma.cartItem.create({
+        data: {
+          quantity,
+          productId,
+          userId,
+          colorId
+        }
+      });
+    }
 
     return NextResponse.json({
       data: cart
