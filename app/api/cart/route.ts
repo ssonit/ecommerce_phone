@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     let cart;
 
     if (existing) {
-      cart = prisma.cartItem.update({
+      cart = await prisma.cartItem.update({
         where: { id: existing.id },
         data: {
           quantity,
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         }
       });
     } else {
-      return prisma.cartItem.create({
+      cart = await prisma.cartItem.create({
         data: {
           quantity,
           productId,
