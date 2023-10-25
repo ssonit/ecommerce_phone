@@ -8,8 +8,11 @@ export default function NavbarList() {
 
   return (
     <ul className='ml-auto flex items-center gap-9 md:mr-6'>
-      <li className='hidden cursor-pointer md:block' onClick={() => router.push('/cart')}>
+      <li className='relative hidden cursor-pointer md:block' onClick={() => router.push('/cart')}>
         <Icons.ShoppingCart className='stroke-black'></Icons.ShoppingCart>
+        <div className='absolute -right-3 -top-2.5'>
+          <div className='flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-sm text-white'>4</div>
+        </div>
       </li>
       <li className='hidden cursor-pointer md:block'>
         <Icons.Heart className='stroke-black'></Icons.Heart>

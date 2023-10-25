@@ -2,7 +2,7 @@
   "extends": ["next", "prettier", "next/core-web-vitals"],
   "plugins": ["prettier"],
   "rules": {
-    "no-unused-vars": "warn",
+    // "no-unused-vars": "warn",
     "prettier/prettier": [
       "warn",
       {
