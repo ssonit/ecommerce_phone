@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getCountCart } from '@/actions/cart';
 import SearchBar from '@/components/SearchBar';
 import UserButtonCustom from '@/components/UserButtonCustom';
+import { auth } from '@clerk/nextjs';
 import NavbarList from './NavbarList';
 
-export default function Navbar() {
+export default async function Navbar() {
+  const { userId } = auth();
+  const count = userId ? await getCountCart(userId as string) : 0;
   return (
     <nav className='sticky left-0 top-0 z-40 w-full bg-white bg-opacity-40 py-3 shadow-lg'>
       <div className='container flex items-center justify-between'>
@@ -14,7 +18,7 @@ export default function Navbar() {
         <div className='ml-6 mr-2 w-[50%] lg:ml-56'>
           <SearchBar></SearchBar>
         </div>
-        <NavbarList></NavbarList>
+        <NavbarList count={count}></NavbarList>
         <div className='hidden md:block'>
           <UserButtonCustom></UserButtonCustom>
         </div>

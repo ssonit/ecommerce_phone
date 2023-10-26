@@ -83,7 +83,7 @@ export default function CartProductItem({
         </div>
         <div className='flex-1'>
           <CardTitle className='mt-2 text-2xl'>{name}</CardTitle>
-          <p className='font-semibold text-red-600'>{price.toString()}</p>
+          <p className='font-semibold text-muted-foreground'>{price.toString()}</p>
           <p>Màu: {color.name}</p>
         </div>
       </div>
