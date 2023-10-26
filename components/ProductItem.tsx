@@ -12,7 +12,7 @@ export default function ProductItem({ product }: { product: ProductImage }) {
   return (
     <div>
       <Link href={`/${id}`}>
-        <Card className='cursor-pointer border-slate-400 shadow-xl'>
+        <Card className='cursor-pointer border-slate-400 transition-all hover:scale-[1.02] hover:shadow-2xl'>
           <div className='p-1.5'>
             <AspectRatio ratio={1 / 1} className='relative w-full'>
               <Image

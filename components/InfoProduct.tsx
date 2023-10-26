@@ -32,6 +32,7 @@ export default function InfoProduct({ product, colors }: { product: ProductImage
 
   const handleAddCart = async () => {
     try {
+      // Nên thêm disabled để tránh người dùng spam liên tục
       await axios.post('/api/cart', {
         quantity,
         colorId: selectedColor,
@@ -86,7 +87,9 @@ export default function InfoProduct({ product, colors }: { product: ProductImage
                       variant={'ghost'}
                       size={'icon'}
                       onClick={() => handleSelectedColor(color.id)}
-                      className={cn('flex h-6 w-6 items-center justify-center rounded-full')}
+                      className={cn(
+                        'flex h-6 w-6 items-center justify-center rounded-full transition-all duration-200'
+                      )}
                       style={{
                         border: `2px solid ${color.id === selectedColor ? color.value : 'transparent'}`
                       }}

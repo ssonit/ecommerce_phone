@@ -9,12 +9,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper/types';
 import { Icons } from './Icons';
 
-const images = [
-  'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-  'https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png',
-  'https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png'
-];
-export default function HeroSlider() {
+export default function HeroSlider({
+  images = [
+    'https://res.cloudinary.com/dyq35jdkl/image/upload/v1698322292/ecommerce/carousel-1_duvpku.webp',
+    'https://res.cloudinary.com/dyq35jdkl/image/upload/v1698322288/ecommerce/carousel-3_xoyy3m.webp',
+    'https://res.cloudinary.com/dyq35jdkl/image/upload/v1698322288/ecommerce/carousel-5_n5qlpy.webp'
+  ]
+}: {
+  images?: string[];
+}) {
   const swiperRef = useRef<SwiperType | null>(null);
   return (
     <div className='relative'>

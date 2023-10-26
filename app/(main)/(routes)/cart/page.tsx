@@ -2,9 +2,14 @@ import BackButton from '@/components/BackButton';
 import CartMain from '@/components/CartMain';
 import { Separator } from '@/components/ui/separator';
 import { prisma } from '@/lib/prismadb';
+import { auth } from '@clerk/nextjs';
 
 export default async function ShoppingCart() {
+  const { userId } = auth();
   const carts = await prisma.cartItem.findMany({
+    where: {
+      userId: userId as string
+    },
     include: {
       product: {
         include: {

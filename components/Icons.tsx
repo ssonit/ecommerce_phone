@@ -8,11 +8,14 @@ import {
   Copy,
   Edit,
   Heart,
+  Home,
   ImagePlus,
   LucideProps,
+  Mail,
   Menu,
   Minus,
   MoreHorizontal,
+  Phone,
   Plus,
   Search,
   ShoppingCart,
@@ -43,6 +46,9 @@ export const Icons = {
   Copy: Copy,
   Edit: Edit,
   X: X,
+  Phone: Phone,
+  Mail: Mail,
+  Home: Home,
   Google: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 24 24'>
       <path
