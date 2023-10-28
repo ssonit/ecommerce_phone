@@ -1,8 +1,5 @@
 import BackButton from '@/components/BackButton';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import CheckoutClient from '@/components/CheckoutClient';
 import { Separator } from '@/components/ui/separator';
 
 export default function Checkout() {
@@ -17,16 +14,7 @@ export default function Checkout() {
 
       <Separator></Separator>
 
-      <div className='container'>
-        <div className='my-6 grid grid-cols-3'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Thông tin đặt hàng</CardTitle>
-            </CardHeader>
-            <CardContent></CardContent>
-          </Card>
-        </div>
-      </div>
+      <CheckoutClient></CheckoutClient>
     </section>
   );
 }

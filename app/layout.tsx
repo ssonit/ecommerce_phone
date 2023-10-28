@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
+import { AppContextProvider } from '@/providers/app-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import ToasterProvider from '@/providers/toast-provider';
 import '@/styles/globals.css';
@@ -21,9 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang='en'>
         <body className={cn('min-h-screen bg-[#f4f6f8]', inter.className)}>
-          <ThemeProvider attribute='class' defaultTheme='light' enableSystem disableTransitionOnChange>
-            {children}
-          </ThemeProvider>
+          <AppContextProvider>
+            <ThemeProvider attribute='class' defaultTheme='light' enableSystem disableTransitionOnChange>
+              {children}
+            </ThemeProvider>
+          </AppContextProvider>
           <ToasterProvider></ToasterProvider>
         </body>
       </html>
