@@ -3,8 +3,10 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import ButtonBuyProduct from '@/components/ButtonBuyProduct';
 import { Icons } from '@/components/Icons';
 import Quantity from '@/components/Quantity';
+import RelatedProduct from '@/components/RelatedProduct';
 import ReviewItem from '@/components/ReviewItem';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
@@ -14,7 +16,6 @@ import { ProductImage } from '@/types/products';
 import { Color } from '@prisma/client';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import RelatedProduct from './RelatedProduct';
 
 export default function InfoProduct({ product, colors }: { product: ProductImage; colors: Color[] }) {
   const router = useRouter();
@@ -117,7 +118,14 @@ export default function InfoProduct({ product, colors }: { product: ProductImage
               <Button onClick={handleAddCart} variant={'outline'}>
                 Thêm vào giỏ hàng
               </Button>
-              <Button>Mua ngay</Button>
+              {/* <ButtonBuyProduct data={[
+                {
+                  id,
+                  image: images[0].url,
+                  name,
+                  color
+                }
+              ]}></ButtonBuyProduct> */}
             </CardFooter>
           </div>
         </div>

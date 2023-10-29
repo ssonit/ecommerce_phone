@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import ButtonBuyProduct from '@/components/ButtonBuyProduct';
 import CartProductItem from '@/components/CartProductItem';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TCartProductItem } from '@/types/carts';
@@ -61,10 +61,6 @@ export default function CartMain({ initCarts }: { initCarts: TCartProductItem[] 
     setCarts((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleBuyProduct = () => {
-    console.log({ carts });
-  };
-
   return (
     <>
       <div className='container min-h-screen'>
@@ -95,7 +91,17 @@ export default function CartMain({ initCarts }: { initCarts: TCartProductItem[] 
           <div>
             <p className='font-semibold text-red-600'>{totalPrice}</p>
           </div>
-          <Button onClick={handleBuyProduct}>Mua ngay</Button>
+          <ButtonBuyProduct
+            data={carts.map((item) => ({
+              id: item.productId,
+              color: item.color.name,
+              image: item.product.images[0].url,
+              name: item.product.name,
+              price: Number(item.product.price.toString()),
+              quantity: item.quantity,
+              cartId: item.id
+            }))}
+          ></ButtonBuyProduct>
         </div>
       </div>
     </>

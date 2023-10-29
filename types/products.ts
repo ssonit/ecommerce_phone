@@ -5,3 +5,13 @@ export type ProductImage = Product & {
 };
 
 export type SortDirection = 'asc' | 'desc';
+
+export interface ProductCheckout {
+  id: string;
+  name: string;
+  price: number;
+  color: string;
+  quantity: number;
+  image: string;
+  cartId?: string;
+}
