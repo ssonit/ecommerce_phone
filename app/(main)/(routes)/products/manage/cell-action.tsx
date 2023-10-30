@@ -1,6 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import AlertDeleteProduct from '@/components/AlertDeleteProduct';
 import { Icons } from '@/components/Icons';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,17 +12,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { AppContext } from '@/providers/app-provider';
 import toast from 'react-hot-toast';
 import { ProductColumn } from './columns';
 
 export default function CellAction({ data }: { data: ProductColumn }) {
   const router = useRouter();
+  const { handleOpenAlertDialog, handleChangeProductDelete } = useContext(AppContext);
 
   const { id } = data;
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
     toast.success('Đã lưu');
+  };
+
+  const onDelete = () => {
+    handleOpenAlertDialog();
+    handleChangeProductDelete({ id: data.id, name: data.name });
   };
 
   return (
@@ -40,7 +49,7 @@ export default function CellAction({ data }: { data: ProductColumn }) {
             <Icons.Edit className='mr-2 h-4 w-4'></Icons.Edit>
             <span>Cập nhật</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onDelete()}>
             <Icons.Trash className='mr-2 h-4 w-4'></Icons.Trash>
             <span>Xóa</span>
           </DropdownMenuItem>

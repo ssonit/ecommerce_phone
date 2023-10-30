@@ -17,6 +17,8 @@ const formSchema = formCheckoutSchema;
 export default function CheckoutFormSummary() {
   const { productOrder } = useContext(AppContext);
 
+  const totalPrice = productOrder.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
     <Card>
       <CardHeader>
@@ -53,22 +55,22 @@ export default function CheckoutFormSummary() {
         <div className='flex flex-col gap-1.5'>
           <div className='flex items-center justify-between text-sm'>
             <span>Tổng:</span>
-            <span>66.000đ</span>
+            <span>{totalPrice}</span>
           </div>
           <div className='flex items-center justify-between text-sm'>
             <span>Phí vận chuyển:</span>
-            <span>0đ</span>
+            <span>0</span>
           </div>
           <div className='flex items-center justify-between text-sm'>
             <span>Giảm:</span>
-            <span>0đ</span>
+            <span>0</span>
           </div>
         </div>
 
         <Separator></Separator>
         <div className='flex items-center justify-between text-xl font-semibold'>
           <span>Tổng tiền:</span>
-          <span>66.000đ</span>
+          <span>{totalPrice}</span>
         </div>
 
         <Button type='submit' className='w-full'>

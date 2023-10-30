@@ -50,3 +50,28 @@ export async function PUT(req: NextRequest, { params }: { params: { productId: s
     return new NextResponse('Internal error', { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest, { params }: { params: { productId: string } }) {
+  try {
+    if (!params.productId) {
+      return NextResponse.json('Product id is required', { status: 400 });
+    }
+
+    const { userId } = auth();
+
+    if (!userId) {
+      return NextResponse.json('Unauthorized', { status: 403 });
+    }
+
+    await prisma.product.delete({
+      where: {
+        id: params.productId
+      }
+    });
+
+    return NextResponse.json('Delete product successfully');
+  } catch (error) {
+    console.log('[PRODUCT_DELETE]', error);
+    return new NextResponse('Internal error', { status: 500 });
+  }
+}

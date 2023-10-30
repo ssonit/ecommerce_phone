@@ -64,26 +64,33 @@ export default function CartMain({ initCarts }: { initCarts: TCartProductItem[] 
   return (
     <>
       <div className='container min-h-screen'>
-        <div className='my-4 flex items-center gap-2'>
-          <Checkbox id='select-all' checked={isAllChecked} onCheckedChange={handleCheckAll}></Checkbox>
-          <label htmlFor='select-all' className='select-none'>
-            Chọn tất cả
-          </label>
-        </div>
+        {initCarts.length > 0 && (
+          <>
+            <div className='my-4 flex items-center gap-2'>
+              <Checkbox id='select-all' checked={isAllChecked} onCheckedChange={handleCheckAll}></Checkbox>
+              <label htmlFor='select-all' className='select-none'>
+                Chọn tất cả
+              </label>
+            </div>
 
-        <Card>
-          <CardContent className='flex flex-col gap-2'>
-            {carts.map((item) => (
-              <CartProductItem
-                key={item.id}
-                cartItem={item}
-                handleChecked={({ id, checked }) => handleChecked({ id, checked })}
-                handleChange={handleChangeQuantityCarts}
-                handleDelete={handleDeleteCart}
-              ></CartProductItem>
-            ))}
-          </CardContent>
-        </Card>
+            <Card>
+              <CardContent className='flex flex-col gap-2'>
+                {carts.map((item) => (
+                  <CartProductItem
+                    key={item.id}
+                    cartItem={item}
+                    handleChecked={({ id, checked }) => handleChecked({ id, checked })}
+                    handleChange={handleChangeQuantityCarts}
+                    handleDelete={handleDeleteCart}
+                  ></CartProductItem>
+                ))}
+              </CardContent>
+            </Card>
+          </>
+        )}
+        {initCarts.length === 0 && (
+          <div className='mt-6 flex items-center justify-center font-medium'>Chưa có sản phẩm</div>
+        )}
       </div>
 
       <div className='sticky bottom-0 left-0 right-0 bg-white'>

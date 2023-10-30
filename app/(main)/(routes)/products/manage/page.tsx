@@ -1,4 +1,5 @@
 import { getManageProducts } from '@/actions/products';
+import AlertDeleteProduct from '@/components/AlertDeleteProduct';
 import CreateProductButton from '@/components/CreateProductButton';
 import ManageNavigation from '@/components/ManageNavigation';
 import ManageSearchProducts from '@/components/ManageSearchProducts';
@@ -45,6 +46,7 @@ export default async function ManageProducts({
 
         <ManageNavigation className='my-3' currentPage={parseInt(page) || 1} total={total}></ManageNavigation>
       </div>
+      <AlertDeleteProduct></AlertDeleteProduct>
     </div>
   );
 }

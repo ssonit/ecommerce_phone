@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { PaymentType } from './enums';
 
 export const formCheckoutSchema = z.object({
   info: z.object({
@@ -8,6 +9,6 @@ export const formCheckoutSchema = z.object({
     notes: z.string()
   }),
   payment: z.object({
-    type: z.enum(['cod', 'zalo'])
+    type: z.enum([PaymentType.COD, PaymentType.ZALO])
   })
 });

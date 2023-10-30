@@ -118,14 +118,18 @@ export default function InfoProduct({ product, colors }: { product: ProductImage
               <Button onClick={handleAddCart} variant={'outline'}>
                 Thêm vào giỏ hàng
               </Button>
-              {/* <ButtonBuyProduct data={[
-                {
-                  id,
-                  image: images[0].url,
-                  name,
-                  color
-                }
-              ]}></ButtonBuyProduct> */}
+              <ButtonBuyProduct
+                data={[
+                  {
+                    id,
+                    image: images[0].url,
+                    name,
+                    color: colors.find((item) => item.id === selectedColor)?.name as string,
+                    price: Number(price.toString()),
+                    quantity
+                  }
+                ]}
+              ></ButtonBuyProduct>
             </CardFooter>
           </div>
         </div>

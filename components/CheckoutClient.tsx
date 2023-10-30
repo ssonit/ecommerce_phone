@@ -1,10 +1,13 @@
 'use client';
 
+import { useContext } from 'react';
 import CheckoutFormInfo from '@/components/CheckoutFormInfo';
 import CheckoutFormPayment from '@/components/CheckoutFormPayment';
 import CheckoutFormSummary from '@/components/CheckoutFormSummary';
 import { Form } from '@/components/ui/form';
+import { PaymentType } from '@/constants/enums';
 import { formCheckoutSchema } from '@/constants/schema';
+import { AppContext } from '@/providers/app-provider';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -12,6 +15,7 @@ import * as z from 'zod';
 const formSchema = formCheckoutSchema;
 
 export default function CheckoutClient() {
+  const { productOrder } = useContext(AppContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -22,12 +26,12 @@ export default function CheckoutClient() {
         notes: ''
       },
       payment: {
-        type: 'cod'
+        type: PaymentType.COD
       }
     }
   });
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values });
+    console.log({ values, productOrder });
   };
   return (
     <div className='container'>
