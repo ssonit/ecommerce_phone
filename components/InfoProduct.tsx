@@ -124,7 +124,10 @@ export default function InfoProduct({ product, colors }: { product: ProductImage
                     id,
                     image: images[0].url,
                     name,
-                    color: colors.find((item) => item.id === selectedColor)?.name as string,
+                    color: {
+                      name: colors.find((item) => item.id === selectedColor)?.name as string,
+                      id: selectedColor
+                    },
                     price: Number(price.toString()),
                     quantity
                   }

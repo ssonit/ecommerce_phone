@@ -10,7 +10,10 @@ export interface ProductCheckout {
   id: string;
   name: string;
   price: number;
-  color: string;
+  color: {
+    name: string;
+    id: string;
+  };
   quantity: number;
   image: string;
   cartId?: string;

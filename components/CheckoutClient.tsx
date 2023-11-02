@@ -9,7 +9,9 @@ import { PaymentType } from '@/constants/enums';
 import { formCheckoutSchema } from '@/constants/schema';
 import { AppContext } from '@/providers/app-provider';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 const formSchema = formCheckoutSchema;
@@ -30,8 +32,22 @@ export default function CheckoutClient() {
       }
     }
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values, productOrder });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const res = await axios.post('/api/order', {
+        productOrder,
+        username: values.info.username,
+        address: values.info.address,
+        phone: values.info.phone,
+        notes: values.info.notes,
+        payment_type: values.payment.type
+      });
+      const data = res.data;
+      toast.success('Đặt hàng thành công');
+      console.log({ data });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className='container'>

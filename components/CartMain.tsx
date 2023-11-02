@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { TCartProductItem } from '@/types/carts';
 
 export default function CartMain({ initCarts }: { initCarts: TCartProductItem[] }) {
-  const [carts, setCarts] = useState(initCarts.map((item) => ({ ...item, checked: true })));
+  const [carts, setCarts] = useState(initCarts.map((item) => ({ ...item, checked: false })));
 
   const isAllChecked = useMemo(() => !carts.some((item) => !item.checked), [carts]);
 
@@ -99,15 +99,20 @@ export default function CartMain({ initCarts }: { initCarts: TCartProductItem[] 
             <p className='font-semibold text-red-600'>{totalPrice}</p>
           </div>
           <ButtonBuyProduct
-            data={carts.map((item) => ({
-              id: item.productId,
-              color: item.color.name,
-              image: item.product.images[0].url,
-              name: item.product.name,
-              price: Number(item.product.price.toString()),
-              quantity: item.quantity,
-              cartId: item.id
-            }))}
+            data={carts
+              .filter((item) => item.checked)
+              .map((item) => ({
+                id: item.productId,
+                color: {
+                  name: item.color.name,
+                  id: item.colorId
+                },
+                image: item.product.images[0].url,
+                name: item.product.name,
+                price: Number(item.product.price.toString()),
+                quantity: item.quantity,
+                cartId: item.id
+              }))}
           ></ButtonBuyProduct>
         </div>
       </div>

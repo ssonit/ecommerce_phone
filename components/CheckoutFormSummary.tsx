@@ -44,7 +44,7 @@ export default function CheckoutFormSummary() {
                 <div>
                   <CardTitle className='text-sm'>{item.name}</CardTitle>
                   <p className='text-sm font-semibold text-muted-foreground'>{item.price}</p>
-                  <p className='text-sm font-medium'>Màu: {item.color}</p>
+                  <p className='text-sm font-medium'>Màu: {item.color.name}</p>
                 </div>
                 <div>x{item.quantity}</div>
               </div>

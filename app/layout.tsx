@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   }
 };
 
+// const ProvidersTree = buildProvidersTree([
+//   [AppContextProvider],
+//   [ThemeProvider, {attribute: 'class', defaultTheme: 'light', enableSystem: true, disableTransitionOnChange: true}]
+// ])
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>

@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -28,13 +30,13 @@ export default function CheckoutFormPayment() {
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0'>
                     <FormControl>
-                      <RadioGroupItem value='cod' />
+                      <RadioGroupItem value='COD' />
                     </FormControl>
                     <FormLabel className='font-normal'>Trả tiền mặt khi nhận hàng (COD)</FormLabel>
                   </FormItem>
                   <FormItem className='flex items-center space-x-3 space-y-0'>
                     <FormControl>
-                      <RadioGroupItem value='zalo' />
+                      <RadioGroupItem value='ZALO' />
                     </FormControl>
                     <FormLabel className='font-normal'>Thanh toán qua Zalo Pay</FormLabel>
                   </FormItem>

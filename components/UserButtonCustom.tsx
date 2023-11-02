@@ -49,6 +49,9 @@ export default function UserButtonCustom() {
             <Link href={'/products/manage'}>Quản lý sản phẩm</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
+            <Link href={'/products/order'}>Quản lý đơn hàng</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
             <Link href={'/products/create'}>Tạo sản phẩm</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
