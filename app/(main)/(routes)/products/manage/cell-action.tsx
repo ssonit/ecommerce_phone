@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
-import AlertDeleteProduct from '@/components/AlertDeleteProduct';
 import { Icons } from '@/components/Icons';
 import { Button } from '@/components/ui/button';
 import {
