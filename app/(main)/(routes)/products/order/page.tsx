@@ -18,7 +18,8 @@ export default async function ManageOrder() {
     price: item.product.price.toString(),
     color: item.color.name,
     total: Number(item.product.price.toString()) * item.quantity,
-    isPaid: item.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán',
+    isPaid: item.isPaid,
+    status: item.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán',
     quantity: item.quantity,
     createdAt: formatDate(item.createdAt.toISOString())
   }));

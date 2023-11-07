@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import CheckoutFormInfo from '@/components/CheckoutFormInfo';
 import CheckoutFormPayment from '@/components/CheckoutFormPayment';
@@ -17,6 +18,7 @@ import * as z from 'zod';
 const formSchema = formCheckoutSchema;
 
 export default function CheckoutClient() {
+  const router = useRouter();
   const { productOrder } = useContext(AppContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,6 +45,7 @@ export default function CheckoutClient() {
         payment_type: values.payment.type
       });
       const data = res.data;
+      router.refresh();
       toast.success('Đặt hàng thành công');
       console.log({ data });
     } catch (error) {

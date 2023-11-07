@@ -9,7 +9,8 @@ export type OrderColumn = {
   price: string;
   color: string;
   total: number;
-  isPaid: string;
+  isPaid: boolean;
+  status: string;
   quantity: number;
   createdAt: string;
 };
@@ -36,7 +37,7 @@ export const columns: ColumnDef<OrderColumn>[] = [
     header: 'Tổng'
   },
   {
-    accessorKey: 'isPaid',
+    accessorKey: 'status',
     header: 'Trạng thái'
   },
   {
