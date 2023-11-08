@@ -1,7 +1,9 @@
 'use client';
 
-import { Dispatch, SetStateAction, createContext, useState } from 'react';
+import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 import { ProductCheckout } from '@/types/products';
+import { User } from '@prisma/client';
+import axios from 'axios';
 
 type TProductDelete = {
   id?: string;
@@ -16,6 +18,8 @@ interface AppContextInterface {
   handleCloseAlertDialog: () => void;
   productDelete: TProductDelete;
   handleChangeProductDelete: (data: TProductDelete) => void;
+  currentUser: User | null;
+  setCurrentUser: Dispatch<SetStateAction<User | null>>;
 }
 
 const initialAppContext: AppContextInterface = {
@@ -26,16 +30,27 @@ const initialAppContext: AppContextInterface = {
   handleOpenAlertDialog: () => null,
   handleCloseAlertDialog: () => null,
   productDelete: {},
-  handleChangeProductDelete: () => null
+  handleChangeProductDelete: () => null,
+  currentUser: null,
+  setCurrentUser: () => null
 };
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext);
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const [currentUser, setCurrentUser] = useState(initialAppContext.currentUser);
   const [productOrder, setProductOrder] = useState<ProductCheckout[]>(initialAppContext.productOrder || []);
 
   const [openAlertDialog, setOpenAlertDialog] = useState(initialAppContext.openAlertDialog);
   const [productDelete, setProductDelete] = useState(initialAppContext.productDelete);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const res = await axios.get('/api/user');
+      setCurrentUser(res.data.data);
+    };
+    getCurrentUser();
+  }, []);
 
   const handleOrderProduct = (data: ProductCheckout[]) => {
     setProductOrder(data);
@@ -63,7 +78,9 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
         handleOpenAlertDialog,
         handleCloseAlertDialog,
         productDelete,
-        handleChangeProductDelete
+        handleChangeProductDelete,
+        currentUser,
+        setCurrentUser
       }}
     >
       {children}

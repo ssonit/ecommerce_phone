@@ -10,6 +10,9 @@ export default async function ManageOrder() {
     include: {
       product: true,
       color: true
+    },
+    orderBy: {
+      createdAt: 'desc'
     }
   });
   const formattedData = data.map((item) => ({

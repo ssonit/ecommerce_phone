@@ -19,14 +19,15 @@ const formSchema = formCheckoutSchema;
 
 export default function CheckoutClient() {
   const router = useRouter();
-  const { productOrder } = useContext(AppContext);
+  const { productOrder, currentUser } = useContext(AppContext);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       info: {
-        username: '',
-        address: '',
-        phone: '',
+        username: currentUser?.username || '',
+        address: currentUser?.address || '',
+        phone: currentUser?.phone || '',
         notes: ''
       },
       payment: {
@@ -47,6 +48,7 @@ export default function CheckoutClient() {
       const data = res.data;
       router.refresh();
       toast.success('Đặt hàng thành công');
+      router.push('/products/order');
       console.log({ data });
     } catch (error) {
       console.log(error);

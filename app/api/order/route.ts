@@ -26,16 +26,19 @@ export async function POST(req: NextRequest) {
     });
 
     const data = await prisma.orderItem.createMany({
-      data: product_order.map((item) => ({
-        userId,
-        productId: item.id,
-        colorId: item.color.id,
-        quantity: item.quantity,
-        username: username || user?.username,
-        phone: phone || user?.phone,
-        address: address || user?.address,
-        notes
-      }))
+      data: [
+        ...product_order.map((item) => ({
+          userId,
+          productId: item.id,
+          colorId: item.color.id,
+          quantity: item.quantity,
+          username: username || user?.username,
+          phone: phone || user?.phone,
+          address: address || user?.address,
+          notes,
+          paymentType: payment_type
+        }))
+      ]
     });
 
     return NextResponse.json({
