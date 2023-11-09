@@ -34,7 +34,7 @@ export default function ProductItem({ product }: { product: ProductImage }) {
           <CardFooter className='flex items-center justify-between px-3 pb-2'>
             <div className='flex items-center gap-1'>
               <Icons.Star className='h-4 w-4 stroke-yellow-400'></Icons.Star>
-              <span className='text-sm'>4.9</span>
+              <span className='text-sm'>5</span>
             </div>
             <Button className='h-9 w-9 rounded-full p-2'>
               <Icons.Plus className='h-5 w-5'></Icons.Plus>

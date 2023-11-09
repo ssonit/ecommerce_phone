@@ -2,6 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import CellAction from './cell-action';
+import CellActionStatus from './cell-action-status';
 
 export type OrderColumn = {
   id: string;
@@ -37,8 +38,9 @@ export const columns: ColumnDef<OrderColumn>[] = [
     header: 'Tổng'
   },
   {
-    accessorKey: 'status',
-    header: 'Trạng thái'
+    header: 'Trạng thái',
+    id: 'status',
+    cell: ({ row }) => <CellActionStatus data={row.original}></CellActionStatus>
   },
   {
     accessorKey: 'createdAt',

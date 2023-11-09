@@ -21,3 +21,8 @@ export const createQueryString = (data: Record<string, any>) => {
 
   return params.toString();
 };
+
+export const statusOrder = {
+  PENDING: '0',
+  SUCCESS: '1'
+} as const;
