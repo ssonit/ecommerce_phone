@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
 import { useClerk } from '@clerk/nextjs';
 import { Icons } from './Icons';
 import { Separator } from './ui/separator';
@@ -77,7 +76,12 @@ export default function UserButtonCustom() {
           </DropdownMenuItem>
           <Separator></Separator>
           <DropdownMenuItem className='p-0'>
-            <Button variant={'ghost'} size={'sm'} className='my-0.5 w-full justify-start px-2'>
+            <Button
+              variant={'ghost'}
+              size={'sm'}
+              onClick={() => signOut()}
+              className='my-0.5 w-full justify-start px-2'
+            >
               <Icons.Logout className='mr-2 h-4 w-4'></Icons.Logout> Đăng xuất
             </Button>
           </DropdownMenuItem>

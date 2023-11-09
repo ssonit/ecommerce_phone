@@ -20,6 +20,7 @@ const formSchema = formCheckoutSchema;
 export default function CheckoutClient() {
   const router = useRouter();
   const { productOrder, currentUser } = useContext(AppContext);
+  console.log({ currentUser });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
       'svix-timestamp': svix_timestamp,
       'svix-signature': svix_signature
     }) as WebhookEvent;
+    console.log('Webhook');
   } catch (err) {
     return NextResponse.json(
       { message: 'Error occured' },
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
 
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { id, email_addresses, image_url, username } = evt.data;
+    console.log({ message: 'Created successfully' });
 
     await prisma.user.upsert({
       where: {

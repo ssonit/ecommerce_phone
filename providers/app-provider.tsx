@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 import { ProductCheckout } from '@/types/products';
+import { useAuth, useClerk } from '@clerk/nextjs';
 import { User } from '@prisma/client';
 import axios from 'axios';
 
@@ -38,6 +39,7 @@ const initialAppContext: AppContextInterface = {
 export const AppContext = createContext<AppContextInterface>(initialAppContext);
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const { isSignedIn } = useAuth();
   const [currentUser, setCurrentUser] = useState(initialAppContext.currentUser);
   const [productOrder, setProductOrder] = useState<ProductCheckout[]>(initialAppContext.productOrder || []);
 
@@ -46,11 +48,13 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     const getCurrentUser = async () => {
-      const res = await axios.get('/api/user');
-      setCurrentUser(res.data.data);
+      if (isSignedIn) {
+        const res = await axios.get('/api/user');
+        setCurrentUser(res.data.data);
+      }
     };
     getCurrentUser();
-  }, []);
+  }, [isSignedIn]);
 
   const handleOrderProduct = (data: ProductCheckout[]) => {
     setProductOrder(data);
