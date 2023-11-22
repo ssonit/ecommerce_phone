@@ -12,6 +12,7 @@ import {
   Home,
   ImagePlus,
   ListOrdered,
+  ListTodo,
   LogOutIcon,
   LucideProps,
   Mail,
@@ -57,6 +58,7 @@ export const Icons = {
   Logout: LogOutIcon,
   PlusSquare: PlusSquare,
   ListOrdered: ListOrdered,
+  ListTodo: ListTodo,
   Google: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 24 24'>
       <path

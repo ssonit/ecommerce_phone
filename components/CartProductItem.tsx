@@ -70,7 +70,7 @@ export default function CartProductItem({
       ></Checkbox>
       <div onClick={() => router.push(`/${cartItem.product.id}`)} className='flex flex-1 cursor-pointer gap-3'>
         <div className='w-24'>
-          <AspectRatio ratio={2 / 3} className='relative h-full'>
+          <AspectRatio ratio={3 / 4} className='relative h-full'>
             <Image
               src={images[0].url}
               alt={name}

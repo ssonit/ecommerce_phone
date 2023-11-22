@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prismadb';
 import { auth } from '@clerk/nextjs';
 import { columns } from './columns';
 
-export default async function ManageOrder() {
+export default async function ManageStoreOrder() {
   const { userId } = auth();
   const data = await prisma.orderItem.findMany({
     include: {
@@ -14,7 +14,9 @@ export default async function ManageOrder() {
       color: true
     },
     where: {
-      userId: userId as string
+      product: {
+        userId: userId as string
+      }
     },
     orderBy: {
       createdAt: 'desc'
@@ -34,7 +36,7 @@ export default async function ManageOrder() {
   return (
     <div className='container'>
       <div className='my-4 flex items-center justify-between'>
-        <SectionTitle title={`Đơn hàng`} desc='Đơn hàng đã đặt'></SectionTitle>
+        <SectionTitle title={`Quản lý đơn hàng`} desc='Đơn hàng'></SectionTitle>
       </div>
       <Separator></Separator>
       <div className='my-4'>

@@ -58,11 +58,20 @@ export default function UserButtonCustom() {
           </DropdownMenuItem>
           <DropdownMenuItem className='p-0'>
             <Link
-              href={'/products/order'}
+              href={'/store/products/order'}
               className='flex w-full items-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground'
             >
               <Icons.ClipboardList className='mr-2 h-4 w-4'></Icons.ClipboardList>
               <span>Quản lý đơn hàng</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className='p-0'>
+            <Link
+              href={'/products/order'}
+              className='flex w-full items-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground'
+            >
+              <Icons.ListTodo className='mr-2 h-4 w-4'></Icons.ListTodo>
+              <span>Đơn hàng đã đặt</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className='p-0'>
