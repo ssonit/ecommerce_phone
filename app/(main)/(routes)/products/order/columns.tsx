@@ -13,6 +13,7 @@ export type OrderColumn = {
   isPaid: boolean;
   status: string;
   quantity: number;
+  info: string;
   createdAt: string;
 };
 
@@ -32,6 +33,10 @@ export const columns: ColumnDef<OrderColumn>[] = [
   {
     accessorKey: 'quantity',
     header: 'Số lượng'
+  },
+  {
+    accessorKey: 'info',
+    header: 'Thông tin'
   },
   {
     accessorKey: 'total',

@@ -29,6 +29,7 @@ export default async function ManageOrder() {
     isPaid: item.isPaid,
     status: item.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán',
     quantity: item.quantity,
+    info: `${item.username} - ${item.phone} - ${item.address}`,
     createdAt: formatDate(item.createdAt.toISOString())
   }));
   return (

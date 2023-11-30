@@ -66,6 +66,7 @@ export const getManageProducts = async ({ search, page, limit }: { search: strin
 
   const total = await prisma.product.count({
     where: {
+      userId: userId as string,
       OR: [
         {
           name: {

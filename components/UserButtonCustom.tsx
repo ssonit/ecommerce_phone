@@ -43,7 +43,7 @@ export default function UserButtonCustom() {
                 <AvatarImage src={user.imageUrl} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <div className='text-sm font-medium'>{user.fullName}</div>
+              <div className='text-sm font-medium'>{user.username || user.fullName}</div>
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />

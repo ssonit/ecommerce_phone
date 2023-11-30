@@ -1,4 +1,4 @@
-export const LIMIT_PRODUCT = 10;
+export const LIMIT_PRODUCT = 5;
 
 export function omitByUndefined<T>(obj: T): Partial<T> {
   const result: Partial<T> = {};
