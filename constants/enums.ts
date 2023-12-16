@@ -1,4 +1,5 @@
 export enum PaymentType {
   COD = 'COD',
-  ZALO = 'ZALO'
+  ZALO = 'ZALO',
+  PAYOO = 'PAYOO'
 }

@@ -40,6 +40,12 @@ export default function CheckoutFormPayment() {
                     </FormControl>
                     <FormLabel className='font-normal'>Thanh toán qua Zalo Pay</FormLabel>
                   </FormItem>
+                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                    <FormControl>
+                      <RadioGroupItem value='PAYOO' />
+                    </FormControl>
+                    <FormLabel className='font-normal'>Thanh toán qua PAYOO</FormLabel>
+                  </FormItem>
                 </RadioGroup>
               </FormControl>
               <FormMessage />

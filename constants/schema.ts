@@ -9,6 +9,6 @@ export const formCheckoutSchema = z.object({
     notes: z.string()
   }),
   payment: z.object({
-    type: z.enum([PaymentType.COD, PaymentType.ZALO])
+    type: z.enum([PaymentType.COD, PaymentType.ZALO, PaymentType.PAYOO])
   })
 });

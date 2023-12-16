@@ -30,7 +30,7 @@ export default function CellActionStatus({ data }: { data: OrderColumn }) {
       <SelectTrigger className='w-[180px]'>
         <SelectValue placeholder={data.status} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className='w-full'>
         <SelectItem value={statusOrder.PENDING}>Chưa thanh toán</SelectItem>
         <SelectItem value={statusOrder.SUCCESS}>Đã thanh toán</SelectItem>
       </SelectContent>

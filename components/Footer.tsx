@@ -11,7 +11,7 @@ export default function Footer({ className }: { className?: string }) {
         <div className='col-span-1 flex flex-col gap-2'>
           <h2 className='text-2xl font-semibold text-purple-600'>Giới thiệu</h2>
           <Image src={'/logo.png'} alt='logo' width={40} height={40} priority></Image>
-          <p className='font-medium uppercase text-purple-500'>TECH ETOET SAVE THE WORLD</p>
+          {/* <p className='font-medium uppercase text-purple-500'>TECH ETOET SAVE THE WORLD</p> */}
         </div>
         <div>
           <h2 className='text-2xl font-semibold text-purple-600'>Liên kết</h2>
@@ -27,7 +27,7 @@ export default function Footer({ className }: { className?: string }) {
           <ul className='col-span-1 mt-3 flex flex-col gap-4'>
             <li className='flex items-center gap-2'>
               <Icons.Home className=' h-4 w-4'></Icons.Home>
-              <span className='text-sm'>622 Dixie Path , South Tobinchester 98336</span>
+              <span className='text-sm'>New York</span>
             </li>
             <li className='flex items-center gap-2'>
               <Icons.Phone className=' h-4 w-4'></Icons.Phone>
